@@ -141,7 +141,7 @@
         .register-btn {
             background: var(--red);
             color: var(--white);
-            padding: 0.5rem 1rem; 
+            padding: 0.5rem 1rem;
             border-radius: 25px;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -350,93 +350,111 @@
                 display: flex;
             }
 
+            .nav-container {
+                justify-content: space-between;
+            }
+
             .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--white);
                 flex-direction: column;
-                gap: 0;
-                height: 0;
-                overflow: hidden;
-                transition: all 0.3s ease;
-                opacity: 0;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                padding: 0;
-                width: 100%;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
             }
 
             .nav-links.active {
-                height: auto;
-                opacity: 1;
-                padding: 20px 0;
-                animation: slideDown 0.3s ease forwards;
+                right: 0;
             }
 
-            .nav-links a {
-                width: 100%;
-                text-align: center;
-                padding: 12px 0;
-                border-bottom: 1px solid #eee;
-                opacity: 0;
-                transform: translateY(10px);
-                animation: fadeInUp 0.3s ease forwards;
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            .nav-links a:nth-child(1) { animation-delay: 0.1s; }
-            .nav-links a:nth-child(2) { animation-delay: 0.2s; }
-            .nav-links a:nth-child(3) { animation-delay: 0.3s; }
-            .nav-links a:nth-child(4) { animation-delay: 0.4s; }
-            .nav-links a:nth-child(5) { animation-delay: 0.5s; }
-
-            .nav-links a:last-of-type {
-                border-bottom: none;
-            }
-
-            .nav-container {
-                width: 95%;
-                padding: 0.5rem 1rem;
+            .map-container {
+                height: 350px;
             }
         }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2.5rem;
             }
+
             .japanese-title {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
+
             .contact-section {
-                margin: 2rem auto;
+                padding: 0 1rem;
             }
-            .map-container {
-                height: 350px;
+
+            .contact-card {
+                padding: 1.2rem;
             }
+        }
+
+        @media (max-width: 480px) {
             .nav-container {
                 width: 90%;
                 padding: 0.5rem 1rem;
             }
+
+            header {
+                padding: 3rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .japanese-title {
+                font-size: 1.1rem;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+
+            .contact-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .contact-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .contact-details i {
+                margin-bottom: 0.5rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
         }
-        @keyframes slideDown {
-            from {
-                transform: scaleY(0);
-                opacity: 0;
-            }
-            to {
-                transform: scaleY(1);
-                opacity: 1;
-            }
+        .form-group label {
+            font-size: 0.9rem;
         }
 
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(10px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.7rem;
+        }
+
+        .submit-btn {
+            padding: 0.8rem;
         }
     </style>
 </head>
