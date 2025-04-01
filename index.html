@@ -434,19 +434,175 @@
         }
 
         .title {
-            font-size: 60px;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 3.8rem;
+            letter-spacing: 0.25rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .hikarion-letter {
+            display: inline-block;
+            color: #1B1B3A;
+            padding: 0 0.15rem;
+            transition: transform 0.3s ease;
         }
-
+        
+        .hikarion-letter:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hikarion-letter-with-circle {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            margin: 0 0.2rem;
+            overflow: visible;
+        }
+        
+        .hikarion-o {
+            position: relative;
+            color: rgba(27, 27, 58, 0.1);
+            z-index: 2;
+            font-size: 3.8rem;
+        }
+        
+        .enso-circle {
+            position: absolute;
+            width: 3.2rem;
+            height: 3.2rem;
+            border: 4px solid #E31837;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: 1;
+            opacity: 0.95;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            box-shadow: 0 0 10px rgba(227, 24, 55, 0.4);
+            animation: spinCrescent 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        
+        .enso-circle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(227, 24, 55, 0.6);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            animation: reverseSpinCrescent 12s ease infinite;
+            opacity: 0.7;
+        }
+        
+        .enso-circle::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #E31837;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+            box-shadow: 0 0 8px rgba(227, 24, 55, 0.8);
+            animation: orbitDot 8s linear infinite;
+        }
+        
+        .hikarion-year {
+            font-size: 2.8rem;
+            margin-left: 0.5rem;
+            color: #1B1B3A;
+            font-weight: 600;
+        }
+        
+        @keyframes spinCrescent {
+            0% { 
+                transform: translate(-50%, -50%) rotate(45deg) scale(1);
+                border-width: 4px;
+                box-shadow: 0 0 10px rgba(227, 24, 55, 0.4);
+            }
+            25% { 
+                transform: translate(-50%, -50%) rotate(135deg) scale(1.05);
+                border-width: 4.5px;
+                box-shadow: 0 0 15px rgba(227, 24, 55, 0.5);
+            }
+            50% { 
+                transform: translate(-50%, -50%) rotate(225deg) scale(1.1);
+                border-width: 5px;
+                box-shadow: 0 0 20px rgba(227, 24, 55, 0.6);
+            }
+            75% { 
+                transform: translate(-50%, -50%) rotate(315deg) scale(1.05);
+                border-width: 4.5px;
+                box-shadow: 0 0 15px rgba(227, 24, 55, 0.5);
+            }
+            100% { 
+                transform: translate(-50%, -50%) rotate(405deg) scale(1);
+                border-width: 4px;
+                box-shadow: 0 0 10px rgba(227, 24, 55, 0.4);
+            }
+        }
+        
+        @keyframes reverseSpinCrescent {
+            0% { transform: rotate(-30deg) scale(0.9); }
+            50% { transform: rotate(150deg) scale(1.1); }
+            100% { transform: rotate(330deg) scale(0.9); }
+        }
+        
+        @keyframes orbitDot {
+            0% { 
+                transform: rotate(0deg) translateX(20px) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: rotate(180deg) translateX(20px) scale(0.6);
+                opacity: 0.7;
+            }
+            100% { 
+                transform: rotate(360deg) translateX(20px) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .hikarion-letter-with-circle {
+                width: 2.8rem;
+                height: 2.8rem;
+            }
+            
+            .enso-circle {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .hikarion-year {
+                font-size: 2.2rem;
+            }
+            
+            .enso-circle::after {
+                width: 6px;
+                height: 6px;
+            }
+        }
+        
         .year {
             color: var(--red);
             font-size: 20px;
@@ -1960,7 +2116,7 @@
                 <a href="events.html" class="nav-link">Events</a>
                 <a href="schedule.html" class="nav-link">Schedule</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                <button class="register-btn"><a href="https://forms.gle/nFJtmFWQN65b1c9WA" style="text-decoration: none; color: white   ;">Register Now</a></button>
+                <button class="register-btn" onclick="window.location.href='https://forms.gle/nFJtmFWQN65b1c9WA'"><a style="text-decoration: none; color: white   ;">Register Now</a></button>
             </div>
             <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -1974,7 +2130,7 @@
             <a href="events.html">Events</a>
             <a href="schedule.html">Schedule</a>
             <a href="contact.html">Contact</a>
-            <button class="register-btn-mobile"><a href="https://forms.gle/nFJtmFWQN65b1c9WA" style="text-decoration: none; color: white   ;">Register Now</a></button>
+            <button class="register-btn-mobile" onclick="window.location.href='https://forms.gle/nFJtmFWQN65b1c9WA'"><a style="text-decoration: none; color: white">Register Now</a></button>
         </div>
     </div>
     
@@ -2015,7 +2171,20 @@
         </div>
         
         <div class="content-section">
-            <h1 class="title">HIKARION `25</h1>
+            <h1 class="title">
+                <span class="hikarion-letter">H</span>
+                <span class="hikarion-letter">I</span>
+                <span class="hikarion-letter">K</span>
+                <span class="hikarion-letter">A</span>
+                <span class="hikarion-letter">R</span>
+                <span class="hikarion-letter">I</span>
+                <span class="hikarion-letter-with-circle">
+                    <span class="hikarion-o">O</span>
+                    <span class="enso-circle"></span>
+                </span>
+                <span class="hikarion-letter">N</span>
+                <span class="hikarion-year">'25</span>
+            </h1>
             <div class="year">Conducted by Hikari club</div>
             
             <div class="info-grid">
@@ -2035,7 +2204,7 @@
 
             <div class="date-location">
                 <div>
-                    <div class="info-value">MAR 25</div>
+                    <div class="info-value">MAY 2</div>
                 </div>
                 <div class="info-value">KRCE</div>
             </div>
@@ -2045,8 +2214,8 @@
                 <div class="countdown" id="countdown">12d 23h 57m 53s</div>
             </div>
 
-            <button class="register-btn" style="width: 100%">
-                <i class="fas fa-paper-plane me-2"></i><a href="https://forms.gle/nFJtmFWQN65b1c9WA" style="text-decoration: none; color: white">Register Now</a>
+            <button class="register-btn" style="width: 100%" onclick="window.location.href='https://forms.gle/nFJtmFWQN65b1c9WA'">
+                <i class="fas fa-paper-plane me-2"></i><a style="text-decoration: none; color: white">Register Now</a>
             </button>
         </div>
     </div>
@@ -2455,7 +2624,7 @@
     
     <script>
         // Set the date we're counting down to
-        const countDownDate = new Date('March 25, 2025 23:59:59').getTime();
+        const countDownDate = new Date('April 27, 2025 23:59:59').getTime();
 
         // Update the countdown every 1 second
         const x = setInterval(function() {
