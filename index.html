@@ -613,6 +613,54 @@
             animation: fadeInUp 0.8s ease forwards 0.5s;
         }
 
+        .conducted-by {
+            position: relative;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #1B1B3A;
+            letter-spacing: 1px;
+            margin: 0 auto 25px;
+            padding: 8px 25px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 245, 230, 0.8));
+            box-shadow: 0 3px 10px rgba(227, 24, 55, 0.1);
+            border: 1px solid rgba(227, 24, 55, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.7s;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .conducted-by:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.2);
+        }
+
+        .conducted-by::before, .conducted-by::after {
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 30px;
+            background: linear-gradient(90deg, transparent, rgba(227, 24, 55, 0.5), transparent);
+            top: 50%;
+        }
+
+        .conducted-by::before {
+            left: -40px;
+        }
+
+        .conducted-by::after {
+            right: -40px;
+        }
+
+        .hikari-highlight {
+            color: var(--red);
+            font-weight: 600;
+            position: relative;
+        }
+
         .info-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1436,7 +1484,7 @@
         .event-btn:hover {
             color: var(--white);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.2);
+            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.4);
         }
 
         .event-btn:hover::before {
@@ -2185,7 +2233,9 @@
                 <span class="hikarion-letter">N</span>
                 <span class="hikarion-year">'25</span>
             </h1>
-            <div class="year">Conducted by Hikari club</div>
+            <div style="text-align: center; width: 100%;">
+                <div class="conducted-by">Conducted by <span class="hikari-highlight">Hikari</span> club</div>
+            </div>
             
             <div class="info-grid">
                 <div class="info-box">
