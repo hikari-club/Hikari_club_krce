@@ -20,10 +20,13 @@
             --white-off: #F8F9FA;
             --accent-gold: #D4AF37;
             --navy: #1B1B3A;
+            --subtle-pink: #FFF0F3;
+            --light-gray: #F2F2F2;
             
             /* Gradients */
             --gradient-red: linear-gradient(135deg, var(--red-light), var(--red));
             --gradient-gold: linear-gradient(135deg, var(--accent-gold), #FFC857);
+            --gradient-card: linear-gradient(135deg, var(--white), var(--subtle-pink));
         }
 
         /* Global Styles */
@@ -34,9 +37,25 @@
             color: var(--navy);
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
             background-image: 
-                linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 249, 250, 0.8)),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9)),
                 url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23E31837' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 20L20 0v20H0zm40-20v20H20L40 0zM0 40l20-20v20H0zm40-20v20H20l20-20z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--white-off);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--red-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--red);
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -54,8 +73,12 @@
             background: var(--gradient-red);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 0;
         }
-
+        
         .hero-content {
             position: relative;
             z-index: 2;
@@ -87,16 +110,43 @@
 
         /* Event Cards */
         .event-card {
-            background: rgba(255, 245, 230, 0.95);
+            background: var(--gradient-card);
             border: 1px solid rgba(227, 24, 55, 0.2);
-            box-shadow: 0 8px 25px rgba(227, 24, 55, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(227, 24, 55, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+        
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 77, 109, 0.05), transparent);
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform 0.6s ease;
         }
 
         .event-card:hover {
-            transform: translateY(-8px) rotate(1deg);
+            transform: translateY(-15px) rotate(1deg);
             border-color: var(--red);
-            box-shadow: 0 15px 35px rgba(227, 24, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(227, 24, 55, 0.2);
+        }
+        
+        .event-card:hover::before {
+            transform: translateY(0) rotate(5deg);
+        }
+        
+        .event-card-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .event-title {
@@ -1446,53 +1496,66 @@
         }
 
         .event-btn {
-            background: transparent;
-            border: 1.5px solid var(--red);
-            color: var(--red);
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            padding: 0.65rem 1.6rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #E31837;
+            background: #fff;
+            border: 2px solid #E31837;
+            border-radius: 8px;
+            cursor: pointer;
             overflow: hidden;
+            transition: color 0.23s cubic-bezier(.7,0,.18,1), border-color 0.23s;
+            z-index: 1;
+            box-shadow: 0 2px 10px rgba(227,24,55,0.08);
         }
-
+        .event-btn span, .event-btn i {
+            position: relative;
+            z-index: 2;
+            transition: color 0.18s, transform 0.3s cubic-bezier(.45,1.6,.6,1);
+        }
         .event-btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: var(--red);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0;
-        }
-
-        .event-btn span, 
-        .event-btn i {
-            position: relative;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg,#E31837 60%,#FF4D6D 100%);
             z-index: 1;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+            transition: width 0.38s cubic-bezier(.45,1.6,.6,1);
+            border-radius: 8px;
         }
-
         .event-btn:hover {
-            color: var(--white);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(227, 24, 55, 0.4);
+            color: #fff;
+            border-color: #CC0000;
         }
-
         .event-btn:hover::before {
             width: 100%;
         }
-
+        .event-btn:hover span, .event-btn:hover i {
+            color: #fff;
+        }
+        .event-btn i {
+            transition: transform 0.4s cubic-bezier(.45,1.6,.6,1), color 0.2s;
+        }
         .event-btn:hover i {
-            transform: translateX(4px);
+            transform: translateX(8px) scale(1.15);
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .event-btn {
+                font-size: 0.98rem;
+                padding: 0.62rem 1.2rem;
+            }
+        }
+        @media (max-width: 650px) {
+            .event-btn {
+                font-size: 0.95rem;
+                padding: 0.56rem 1rem;
+            }
         }
 
         /* Section Header Styling */
@@ -2153,6 +2216,9 @@
     </style>
 </head>
 <body>
+    <!-- Decorative patterns -->
+    <div class="japanese-pattern pattern-top-right"></div>
+    <div class="japanese-pattern pattern-bottom-left"></div>
     <div class="navbar-container">
         <nav class="navbar">
             <a class="navbar-brand" href="#">
@@ -2247,8 +2313,8 @@
                     <div class="info-label">EVENTS</div>
                 </div>
                 <div class="info-box">
-                    <div class="info-value">₹15000+</div>
-                    <div class="info-label">PRIZES</div>
+                    <div class="info-value">Cash Prize</div>
+                    <div class="info-label">For winners</div>
                 </div>
             </div>
 
@@ -2332,7 +2398,7 @@
                             <h3 class="card-title">Japanese Language Quiz</h3>
                             <h4 class="card-title-jp">日本語クイズ</h4>
                             <p class="card-text">Test your knowledge of Japanese language through exciting quiz challenges.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#japanese-quiz'">
+                            <button class="event-btn" data-event="japanese-quiz">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2349,7 +2415,7 @@
                             <h3 class="card-title">Kanji Quest</h3>
                             <h4 class="card-title-jp">漢字クエスト</h4>
                             <p class="card-text">Master Japanese characters through interactive challenges and competitions.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#kanji-clash'">
+                            <button class="event-btn" data-event="kanji-clash">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2366,7 +2432,7 @@
                             <h3 class="card-title">Interpret</h3>
                             <h4 class="card-title-jp">通訳チャレンジ</h4>
                             <p class="card-text">Show your Japanese-English interpretation skills in real-time scenarios.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#interpret'">
+                            <button class="event-btn" data-event="interpret">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2383,7 +2449,7 @@
                             <h3 class="card-title">Animethon</h3>
                             <h4 class="card-title-jp">アニメソン</h4>
                             <p class="card-text">Experience Japanese pop culture through anime and manga activities.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#animethon'">
+                            <button class="event-btn" data-event="animethon">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2400,7 +2466,7 @@
                             <h3 class="card-title">Japanese Drawing Contest</h3>
                             <h4 class="card-title-jp">日本画コンテスト</h4>
                             <p class="card-text">Create artwork inspired by traditional Japanese art styles.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#drawing-contest'">
+                            <button class="event-btn" data-event="drawing-contest">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2417,7 +2483,7 @@
                             <h3 class="card-title">Connections</h3>
                             <h4 class="card-title-jp">コネクション</h4>
                             <p class="card-text">Challenge yourself with Japanese language puzzles and word games.</p>
-                            <button class="event-btn" onclick="window.location.href='events.html#connections'">
+                            <button class="event-btn" data-event="connections">
                                 <span>View Details</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
@@ -2428,6 +2494,404 @@
         </div>
     </div>
     
+    <div id="event-modal" class="event-modal" style="display:none;">
+        <div class="event-modal-content">
+            <span class="event-modal-close">&times;</span>
+            <div id="event-modal-body"></div>
+        </div>
+    </div>
+    <script>
+    // Event data for modal
+    const eventData = {
+        'japanese-quiz': {
+            title: 'Japanese Language Quiz',
+            jp: '日本語クイズ',
+            image: 'quiz.png',
+            description: 'Test your knowledge of Japanese language through exciting quiz challenges. Challenge yourself with this interactive Japanese language quiz competition!',
+            venue: 'Main Auditorium, Block A',
+            date: 'March 15, 2025',
+            time: '10:00 AM - 12:00 PM',
+            rules: [
+                'Individual event',
+                'Three interactive rounds with increasing difficulty',
+                'Round 1: Language Basics & Recognition',
+                'Round 2: Vocabulary & Grammar',
+                'Round 3: Comprehensive Assessment',
+                'Scores based on accuracy and speed'
+            ]
+        },
+        'kanji-clash': {
+            title: 'Kanji Quest',
+            jp: '漢字クエスト',
+            image: 'kanji.png',
+            description: 'Master Japanese characters through interactive challenges and competitions. Test your knowledge of Japanese characters in this challenging competition!',
+            venue: 'Main Auditorium, Block A',
+            date: 'March 15, 2025',
+            time: '2:00 PM - 4:00 PM',
+            rules: [
+                'Team event (2 members per team)',
+                'Three challenging rounds of Kanji mastery',
+                'Round 1: Kanji Recognition & Meaning',
+                'Round 2: Stroke Order & Writing',
+                'Round 3: Compound Words & Usage',
+                'Points awarded for accuracy and neatness'
+            ]
+        },
+        'interpret': {
+            title: 'Interpret',
+            jp: '通訳チャレンジ',
+            image: 'interpret.png',
+            description: 'Show your Japanese-English interpretation skills in real-time scenarios. Demonstrate your Japanese interpretation skills in this language challenge!',
+            venue: 'Main Auditorium, Block A',
+            date: 'March 15, 2025',
+            time: '9:00 AM - 10:30 AM',
+            rules: [
+                'Individual event',
+                'Three rounds with increasing difficulty',
+                'Basic to advanced interpretation challenges',
+                'Real-time translation scenarios',
+                'Cultural context understanding',
+                'Pronunciation and fluency assessment'
+            ]
+        },
+        'animethon': {
+            title: 'Animethon',
+            jp: 'アニメソン',
+            image: 'animethon.png',
+            description: 'Experience Japanese pop culture through anime and manga activities.',
+            venue: 'Art Gallery',
+            date: 'March 15, 2025',
+            time: '1:30 PM - 3:00 PM',
+            rules: [
+                'Anime quiz and activities',
+                'Cosplay contest',
+                'Manga drawing session',
+                'Team and individual participation'
+            ]
+        },
+        'drawing-contest': {
+            title: 'Japanese Drawing Contest',
+            jp: '日本画コンテスト',
+            image: 'drawing_contest.png',
+            description: 'Create artwork inspired by traditional Japanese art styles.',
+            venue: 'Art Room 101',
+            date: 'March 15, 2025',
+            time: '9:00 AM - 10:45 AM',
+            rules: [
+                'Individual participation',
+                'Theme-based drawing',
+                'Traditional and digital accepted',
+                'Judging based on creativity and technique'
+            ]
+        },
+        'connections': {
+            title: 'Connections',
+            jp: 'コネクション',
+            image: 'connections.png',
+            description: 'Challenge yourself with Japanese language puzzles and word games. Team up and find the connections between Japanese words and meanings!',
+            venue: 'Cultural Hall',
+            date: 'March 15, 2025',
+            time: '9:00 AM - 10:45 AM',
+            rules: [
+                'Team event (2-3 members)',
+                'Puzzle and word games',
+                'Rounds of increasing difficulty',
+                'Judging based on accuracy and speed'
+            ]
+        }
+    };
+
+    document.querySelectorAll('.event-btn[data-event]').forEach(btn => {
+        btn.onclick = function(e) {
+            e.preventDefault();
+            const eventKey = btn.getAttribute('data-event');
+            const data = eventData[eventKey];
+            if (!data) return;
+            const modal = document.getElementById('event-modal');
+            const body = document.getElementById('event-modal-body');
+            body.innerHTML = `
+                <div class="event-modal-flex">
+                    <div class="event-modal-img-wrap"><img src="${data.image}" alt="${data.title}" class="event-modal-img"></div>
+                    <div class="event-modal-details">
+                        <h2 class="event-modal-title">${data.title}</h2>
+                        <h3 class="event-modal-jp">${data.jp}</h3>
+                        <p class="event-modal-desc">${data.description}</p>
+                        <div class="event-modal-info"><b>Venue:</b> ${data.venue} <br><b>Date:</b> ${data.date} <br><b>Time:</b> ${data.time}</div>
+                        <div class="event-modal-rules"><b>Rules:</b><ul>${data.rules.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+                        <a href="pdfs/rules.pdf" download class="event-modal-download"><button>Download Rulebook <i class='fas fa-download'></i></button></a>
+                    </div>
+                </div>
+            `;
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            setTimeout(()=>modal.classList.add('visible'), 10);
+        }
+    });
+    document.querySelector('.event-modal-close').onclick = function() {
+        const modal = document.getElementById('event-modal');
+        modal.classList.remove('visible');
+        setTimeout(()=>modal.style.display = 'none', 300);
+        modal.classList.remove('show');
+    };
+    window.onclick = function(event) {
+        const modal = document.getElementById('event-modal');
+        if (event.target === modal) {
+            modal.classList.remove('visible');
+            setTimeout(()=>modal.style.display = 'none', 300);
+            modal.classList.remove('show');
+        }
+    };
+    </script>
+    <style>
+    .event-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background: rgba(0,0,0,0.6);
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.35s cubic-bezier(.77,0,.18,1);
+    }
+    .event-modal.show {
+        opacity: 1;
+        transition: opacity 0.35s cubic-bezier(.77,0,.18,1);
+    }
+    .event-modal.visible {
+        opacity: 1;
+    }
+    .event-modal-content {
+        background: #fff;
+        margin: 2% auto;
+        padding: 0;
+        border-radius: 20px;
+        max-width: 700px;
+        position: relative;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.22);
+        animation: modalBounceIn 0.7s cubic-bezier(.45,1.6,.6,1) both;
+        overflow: hidden;
+        border: 1.5px solid #E31837;
+    }
+    @keyframes modalBounceIn {
+        0% { transform: scale(0.85) translateY(80px); opacity: 0; }
+        50% { transform: scale(1.03) translateY(-8px); opacity: 1; }
+        70% { transform: scale(0.97) translateY(2px); }
+        100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .event-modal-close {
+        position: absolute;
+        right: 26px;
+        top: 20px;
+        font-size: 2.1rem;
+        color: #E31837;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 10;
+        transition: color 0.2s, transform 0.2s;
+    }
+    .event-modal-close:hover {
+        color: #CC0000;
+        transform: rotate(12deg) scale(1.15);
+    }
+    .event-modal-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: stretch;
+        min-height: 320px;
+        width: 100%;
+        animation: modalContentSlideIn 0.6s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalContentSlideIn {
+        0% { opacity: 0; transform: translateX(60px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    .event-modal-img-wrap {
+        flex: 0 0 260px;
+        background: linear-gradient(135deg,#FFB7C5 50%,#fff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.2rem 2rem 2rem;
+        border-right: 1.5px solid #FF4D6D33;
+        animation: modalImgFadeIn 0.9s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalImgFadeIn {
+        0% { opacity: 0; transform: scale(0.7) rotate(-12deg); }
+        60% { opacity: 1; transform: scale(1.08) rotate(4deg); }
+        100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    .event-modal-img {
+        max-width: 180px;
+        border-radius: 14px;
+        box-shadow: 0 2px 18px rgba(227,24,55,0.13);
+        transition: transform 0.5s cubic-bezier(.45,1.6,.6,1), box-shadow 0.2s;
+        animation: modalImgPop 0.9s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    .event-modal-img:hover {
+        transform: scale(1.08) rotate(-2deg);
+        box-shadow: 0 8px 32px rgba(227,24,55,0.18);
+    }
+    @keyframes modalImgPop {
+        0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+        80% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+        100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    .event-modal-details {
+        flex: 1 1 0%;
+        padding: 2.2rem 2.2rem 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+        animation: modalDetailsFadeIn 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalDetailsFadeIn {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .event-modal-title {
+        font-size: 2.1rem;
+        color: #E31837;
+        margin-bottom: 0.2rem;
+        text-align: left;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        animation: modalTitlePop 0.5s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalTitlePop {
+        0% { opacity: 0; transform: scale(0.8) translateY(-18px); }
+        70% { opacity: 1; transform: scale(1.04) translateY(2px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .event-modal-jp {
+        font-size: 1.18rem;
+        color: #FF4D6D;
+        margin-bottom: 1.2rem;
+        text-align: left;
+        font-family: 'Noto Serif JP', serif;
+        font-weight: 500;
+        animation: modalJpFade 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalJpFade {
+        0% { opacity: 0; transform: translateX(-20px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    .event-modal-desc {
+        font-size: 1.08rem;
+        color: #333;
+        margin-bottom: 1.2rem;
+        text-align: left;
+        animation: modalDescFade 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalDescFade {
+        0% { opacity: 0; transform: translateY(16px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .event-modal-info {
+        font-size: 1.03rem;
+        margin-bottom: 1.1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 0.7rem 1rem;
+        color: #E31837;
+        font-weight: 500;
+        border-left: 3px solid #FF4D6D;
+        animation: modalInfoFade 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalInfoFade {
+        0% { opacity: 0; transform: translateX(20px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    .event-modal-rules {
+        margin-bottom: 1.3rem;
+        animation: modalRulesFade 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalRulesFade {
+        0% { opacity: 0; transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    .event-modal-rules ul {
+        margin: 0.3rem 0 0 1.1rem;
+        padding: 0;
+    }
+    .event-modal-rules li {
+        margin-bottom: 0.2rem;
+        color: #333;
+        font-size: 0.98rem;
+        line-height: 1.45;
+        transition: color 0.2s;
+    }
+    .event-modal-rules li:hover {
+        color: #E31837;
+    }
+    .event-modal-download {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 0.3rem;
+        animation: modalDownloadBtnFade 0.7s cubic-bezier(.45,1.6,.6,1) both;
+    }
+    @keyframes modalDownloadBtnFade {
+        0% { opacity: 0; transform: translateY(16px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .event-modal-download button {
+        background: linear-gradient(90deg,#E31837 60%,#FF4D6D 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.7rem 1.4rem;
+        font-size: 1.04rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.18s, transform 0.18s;
+        box-shadow: 0 2px 8px rgba(227,24,55,0.08);
+    }
+    .event-modal-download button:hover {
+        background: linear-gradient(90deg,#CC0000 60%,#FF4D6D 100%);
+        transform: translateY(-2px) scale(1.04);
+    }
+    @media (max-width: 1200px) {
+        .event-modal-content {
+            max-width: 90vw;
+        }
+    }
+    @media (max-width: 900px) {
+        .event-modal-content {
+            max-width: 98vw;
+        }
+        .event-modal-flex {
+            flex-direction: column;
+            min-height: unset;
+        }
+        .event-modal-img-wrap {
+            flex: unset;
+            border-right: none;
+            border-bottom: 1.5px solid #FF4D6D33;
+            padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+        }
+        .event-modal-details {
+            padding: 1.2rem 1.2rem 1.5rem 1.2rem;
+        }
+        .event-modal-title {
+            font-size: 1.45rem;
+        }
+    }
+    @media (max-width: 650px) {
+        .event-modal-content {
+            max-width: 99vw;
+            padding: 0;
+        }
+        .event-modal-img {
+            max-width: 90px;
+        }
+    }
+    </style>
     <div class="about-section">
         <div class="about-container">
             <div class="section-header">
@@ -2558,7 +3022,7 @@
             border-radius: 15px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
@@ -2581,7 +3045,7 @@
 
         /* Schedule Section */
         .schedule-section {
-            background: linear-gradient(135deg, rgba(255, 229, 180, 0.5), rgba(255, 240, 212, 0.5));
+            background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(255,255,255,0.95));
             padding: 5rem 0;
         }
 
@@ -2700,6 +3164,17 @@
                 document.getElementById('countdown').innerHTML = 'REGISTRATION CLOSED';
             }
         }, 1000);
+        
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     </script>
     
     <footer class="footer-section">
