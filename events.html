@@ -28,7 +28,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, rgba(227, 24, 55, 0.95), rgba(204, 0, 0, 0.95));
+            background: #E31837;
             padding: 2rem 0;
             position: relative;
             overflow: hidden;
@@ -220,7 +220,7 @@
 
         /* Enhanced Button Styles */
         .btn-primary, .register-btn, .download-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+            background: #E31837;
             color: white;
             border: none;
             padding: 0.8rem 2rem;
@@ -228,29 +228,17 @@
             font-weight: 600;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
         }
 
-        .btn-primary::before, .register-btn::before, .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent-pink), var(--primary));
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn-primary:hover::before, .register-btn:hover::before, .download-btn:hover::before {
-            left: 0;
-        }
-
         .btn-primary:hover, .register-btn:hover, .download-btn:hover {
-            transform: translateY(-3px);
+            filter: brightness(1.08);
             box-shadow: 0 8px 25px rgba(227, 24, 55, 0.2);
+        }
+
+        .btn-primary::before, .register-btn::before, .download-btn::before {
+            display: none;
         }
 
         .btn-outline {
@@ -260,13 +248,13 @@
             padding: 0.8rem 2rem;
             border-radius: 8px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: background 0.3s, color 0.3s, filter 0.3s;
         }
 
         .btn-outline:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-3px);
+            filter: brightness(1.06);
             box-shadow: 0 8px 25px rgba(227, 24, 55, 0.2);
         }
 
@@ -282,168 +270,133 @@
 
         /* Event Details Section */
         .event-details {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 2rem;
             display: grid;
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem 2rem;
+            padding: 2rem 1rem 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            .event-details {
+                grid-template-columns: 1fr;
+                padding: 1rem 0.5rem 2rem 0.5rem;
+            }
         }
 
         .event {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(227, 24, 55, 0.1);
+            background: #fff;
             border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 45% 1fr;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .event:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 40px rgba(227, 24, 55, 0.1);
-        }
-
-        .event-image {
-            position: relative;
-            height: 100%;
-            min-height: 300px;
-            overflow: hidden;
-        }
-
-        .event-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .event:hover .event-image img {
-            transform: scale(1.05);
-        }
-
-        .event-content {
-            padding: 2rem;
+            box-shadow: 0 4px 18px rgba(227, 24, 55, 0.08);
+            border: 2px solid var(--sakura);
+            transition: box-shadow 0.18s, border-color 0.18s, filter 0.18s;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            min-height: 100%;
         }
-
+        .event:hover {
+            box-shadow: 0 8px 28px 0 rgba(227,24,55,0.18);
+            border-color: var(--primary);
+            filter: brightness(1.03);
+        }
+        .event-content-clean {
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0 0 18px 18px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+        }
         .event-header {
-            border-bottom: 2px solid rgba(227, 24, 55, 0.1);
-            padding-bottom: 1rem;
-            position: relative;
+            background: #E31837;
+            color: #fff;
+            border-radius: 18px 18px 0 0;
+            padding: 1.2rem 1.5rem 1rem 1.5rem;
+            margin: -2rem -1.5rem 1.2rem -1.5rem;
+            box-shadow: 0 2px 12px rgba(227, 24, 55, 0.09);
         }
-
-        .event-header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
-            transition: width 0.3s ease;
-        }
-
-        .event:hover .event-header::after {
-            width: 100%;
-        }
-
         .event-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            margin: 0;
-            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+            color: #fff;
+            letter-spacing: 0.5px;
         }
-
         .event-header h3 {
             font-family: 'Noto Serif JP', serif;
-            color: var(--text-dark);
-            font-size: 1.2rem;
-            margin: 0.5rem 0 0;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0.4rem;
+            color: #ffe9f0;
         }
-
-        .event-details-btn, .event-rules-btn {
+        .event-header p {
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .event-description {
+            margin-bottom: 1.3rem;
+        }
+        .event-info-card, .card.mb-4 {
+            background: #fff6fa;
+            border: 1.5px solid var(--sakura);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(255, 183, 197, 0.07);
+            margin-bottom: 1.1rem;
+        }
+        .event-info-card .card-header, .card.mb-4 .card-header {
+            background: #fff;
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.08rem;
+            padding: 0.85rem 1.2rem;
+        }
+        .event-format-list {
+            margin-bottom: 0;
+            padding-left: 1.2rem;
+        }
+        .event-buttons {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .event-rules-btn {
+            background: #E31837;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.3rem;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background 0.18s, color 0.18s, filter 0.18s, box-shadow 0.18s;
+            box-shadow: 0 2px 10px rgba(227, 24, 55, 0.11);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            text-decoration: none;
         }
-
-        .event-details-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
-            color: white;
-            border: none;
-        }
-
-        .event-rules-btn {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .event-details-btn:hover, .event-rules-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(227, 24, 55, 0.2);
-        }
-
         .event-rules-btn:hover {
-            background: var(--primary);
-            color: white;
+            background: #CC0000;
+            color: #fff;
+            filter: brightness(1.07);
+            box-shadow: 0 6px 24px rgba(227, 24, 55, 0.18);
         }
-
-        .event-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-        }
-
-        .event-buttons i {
-            transition: transform 0.3s ease;
-        }
-
-        .event-buttons button:hover i {
-            transform: translateX(5px);
-        }
-
-        @media (max-width: 992px) {
-            .event {
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            .event-details {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0.5rem 0.2rem 1.5rem 0.2rem;
             }
-
-            .event-image {
-                min-height: 250px;
+            .event-header {
+                padding: 1rem 1rem 0.8rem 1rem;
+                margin: -2rem -1rem 1rem -1rem;
             }
-        }
-
-        @media (max-width: 768px) {
-            .event-content {
-                padding: 1.5rem;
-            }
-
-            .event-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .event-buttons {
-                flex-direction: column;
-            }
-
-            .event-buttons button {
-                width: 100%;
+            .event-content-clean {
+                padding: 1rem 0.7rem 1rem 0.7rem;
             }
         }
 
@@ -516,8 +469,8 @@
         }
 
         .event-info-card .card-header {
-            background: linear-gradient(135deg, var(--primary), #ff4d6d);
-            color: white;
+            background: #fff;
+            color: var(--primary);
             font-weight: 500;
             border: none;
             padding: 0.75rem 1rem;
@@ -578,7 +531,7 @@
         }
 
         .event-rules h4::before {
-            background: linear-gradient(120deg, var(--primary) 0%, #ff4d6d 100%);
+            background: #E31837;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -651,19 +604,7 @@
         }
 
         .register-btn::before, .rules-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            transition: width 0.3s ease;
-            z-index: -1;
-            border-radius: 25px;
-        }
-
-        .register-btn:hover::before, .rules-btn:hover::before {
-            width: 100%;
+            display: none;
         }
 
         .register-btn {
@@ -672,12 +613,8 @@
             border: none;
         }
 
-        .register-btn::before {
-            background: var(--hover-primary);
-        }
-
         .register-btn:hover {
-            transform: translateY(-5px);
+            filter: brightness(1.08);
             box-shadow: 0 10px 20px rgba(227, 24, 55, 0.3);
         }
 
@@ -687,13 +624,9 @@
             border: 2px solid var(--primary);
         }
 
-        .rules-btn::before {
-            background: var(--primary);
-        }
-
         .rules-btn:hover {
             color: white;
-            transform: translateY(-5px);
+            filter: brightness(1.06);
             box-shadow: 0 10px 20px rgba(227, 24, 55, 0.2);
         }
 
@@ -710,7 +643,7 @@
             position: fixed;
             right: 2rem;
             bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary), #ff4d6d);
+            background: #E31837;
             color: white;
             width: 100px;
             height: 100px;
@@ -827,20 +760,12 @@
         }
 
         .nav-register-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: var(--hover-primary);
-            transition: width 0.3s ease;
-            z-index: -1;
-            border-radius: 25px;
+            display: none;
         }
 
-        .nav-register-btn:hover::before {
-            width: 100%;
+        .nav-register-btn:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 10px 20px rgba(227, 24, 55, 0.3);
         }
 
         @media (max-width: 992px) {
@@ -971,7 +896,7 @@
             position: fixed;
             right: 2rem;
             bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary), #ff4d6d);
+            background: #E31837;
             color: white;
             width: 100px;
             height: 100px;
@@ -1062,6 +987,24 @@
 
         .highlight-event {
             animation: highlightEvent 2s ease-out;
+        }
+
+        .event-content-clean {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(227, 24, 55, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .event-content-clean:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(227, 24, 55, 0.1);
         }
     </style>
 </head>
@@ -1184,410 +1127,369 @@
 
     <main>
         <section class="event-details">
+
             <div class="event" id="japanese-quiz">
-                <div class="event-image">
-                    <img src="images/japanese-quiz.jpg" alt="Japanese Quiz Competition">
-                </div>
-                <div class="event-content">
+                <div class="event-content event-content-clean">
                     <div class="event-header">
                         <h2>Japanese Quiz</h2>
                         <h3>日本語クイズ</h3>
-                        <p>Test your knowledge of Japanese culture and language!</p>
+                        <p>Test your knowledge of Japanese language!</p>
                     </div>
                     <div class="event-description">
-                        <p>Challenge yourself with questions about Japanese culture, language, and traditions. From basic phrases to cultural insights, showcase your expertise!</p>
+                        <p>Challenge yourself with this interactive Japanese language quiz competition!</p>
                         
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event-info-card">
-                                    <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Main Auditorium, Block A</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 15, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 10:00 AM - 12:00 PM</p>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>10:00 AM - 12:00 PM</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Teams must consist of exactly 3 members</li>
-                                <li>Competition will have 3 rounds of increasing difficulty</li>
-                                <li>Questions will include multimedia content about Japanese culture</li>
-                                <li>Use of electronic devices during the quiz is prohibited</li>
-                                <li>Judge's decision will be final</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Akash Kumar</span>
-                                <span>+91 9876543210</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Priya Singh</span>
-                                <span>+91 9876543211</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-buttons">
-                        <button class="event-rules-btn">
-                            Download Rules
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="event" id="interpret">
-                <div class="event-image">
-                    <img src="images/interpret.jpg" alt="Japanese Interpretation">
-                </div>
-                <div class="event-content">
-                    <div class="event-header">
-                        <h2>Interpret</h2>
-                        <h3>通訳コンテスト</h3>
-                        <p>Showcase your Japanese interpretation skills!</p>
-                    </div>
-                    <div class="event-description">
-                        <p>Put your Japanese language skills to the test in this exciting interpretation challenge. Translate and interpret Japanese content in real-time!</p>
-                        
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="event-info-card">
                                     <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
+                                        <i class="fas fa-info-circle"></i> Event Format
                                     </div>
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Language Lab, Block B</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 16, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 2:00 PM - 4:00 PM</p>
-                                            </div>
-                                        </div>
+                                        <ul class="event-format-list">
+                                            <li>Individual event</li>
+                                            <li>Three interactive rounds with increasing difficulty</li>
+                                            <li>Round 1: Language Basics & Recognition</li>
+                                            <li>Round 2: Vocabulary & Grammar</li>
+                                            <li>Round 3: Comprehensive Assessment</li>
+                                            <li>Scores based on accuracy and speed</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Individual participation only</li>
-                                <li>Competition will have 2 rounds: written and oral</li>
-                                <li>Participants must bring their own art materials</li>
-                                <li>Basic knowledge of Japanese language (N5 level) is required</li>
-                                <li>Time limits will be strictly enforced</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Ravi Verma</span>
-                                <span>+91 9876543212</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Meera Patel</span>
-                                <span>+91 9876543213</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="event-buttons">
-                        <button class="event-rules-btn">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
                             Download Rules
                             <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="event" id="drawing-contest">
-                <div class="event-image">
-                    <img src="images/drawing-contest.jpg" alt="Japanese Drawing Contest">
-                </div>
-                <div class="event-content">
-                    <div class="event-header">
-                        <h2>Japanese Drawing Contest</h2>
-                        <h3>日本画コンテスト</h3>
-                        <p>Express your creativity through Japanese art!</p>
-                    </div>
-                    <div class="event-description">
-                        <p>Create beautiful artwork inspired by Japanese culture and aesthetics. From traditional styles to modern interpretations, let your artistic vision shine!</p>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event-info-card">
-                                    <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Art Gallery, Block C</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 15, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 11:00 AM - 3:00 PM</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Individual participation only</li>
-                                <li>Participants must bring their own art materials</li>
-                                <li>Theme will be provided on the day of the event</li>
-                                <li>Artwork must be completed within the given time frame</li>
-                                <li>Judging will be based on creativity, technique, and theme adherence</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Amit Shah</span>
-                                <span>+91 9876543214</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Sara Khan</span>
-                                <span>+91 9876543215</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-buttons">
-                        <button class="event-rules-btn">
-                            Download Rules
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="event" id="crosswords">
-                <div class="event-image">
-                    <img src="images/crosswords.jpg" alt="Japanese Crosswords">
-                </div>
-                <div class="event-content">
-                    <div class="event-header">
-                        <h2>Crosswords</h2>
-                        <h3>クロスワード</h3>
-                        <p>Test your Japanese vocabulary!</p>
-                    </div>
-                    <div class="event-description">
-                        <p>Challenge yourself with Japanese crossword puzzles. Perfect for language learners and word enthusiasts!</p>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event-info-card">
-                                    <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Seminar Hall, Block E</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 17, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 10:00 AM - 12:00 PM</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Individual participation only</li>
-                                <li>Competition will have timed rounds</li>
-                                <li>Multiple difficulty levels available</li>
-                                <li>Points awarded based on accuracy and completion time</li>
-                                <li>No electronic devices or reference materials allowed</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Vikram Joshi</span>
-                                <span>+91 9876543220</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Pooja Reddy</span>
-                                <span>+91 9876543221</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-buttons">
-                        <button class="event-rules-btn">
-                            Download Rules
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="event" id="animethon">
-                <div class="event-image">
-                    <img src="images/animethon.jpg" alt="Animethon Festival">
-                </div>
-                <div class="event-content">
-                    <div class="event-header">
-                        <h2>Animethon</h2>
-                        <h3>アニメソン</h3>
-                        <p>Celebrate the world of anime!</p>
-                    </div>
-                    <div class="event-description">
-                        <p>A marathon of selected anime episodes and movies. Join fellow fans for an immersive anime experience!</p>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event-info-card">
-                                    <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Auditorium, Block F</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 18, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 10:00 AM - 6:00 PM</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Individual participation only</li>
-                                <li>Pre-registration is mandatory</li>
-                                <li>Participants must bring their own snacks and drinks</li>
-                                <li>No outside food or drinks allowed</li>
-                                <li>Event schedule will be provided on the day of the event</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Rohan Jain</span>
-                                <span>+91 9876543222</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Shreya Singh</span>
-                                <span>+91 9876543223</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-buttons">
-                        <button class="event-rules-btn">
-                            Download Rules
-                            <i class="fas fa-download"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
 
             <div class="event" id="kanji-clash">
-                <div class="event-image">
-                    <img src="images/kanji-clash.jpg" alt="Kanji Clash Competition">
-                </div>
-                <div class="event-content">
+                <div class="event-content event-content-clean">
                     <div class="event-header">
                         <h2>Kanji Clash</h2>
                         <h3>漢字バトル</h3>
                         <p>Master the art of Japanese characters!</p>
                     </div>
                     <div class="event-description">
-                        <p>Test your knowledge of Kanji in this exciting competition. From basic to advanced levels, challenge yourself with Japanese writing!</p>
+                        <p>Test your knowledge of Japanese characters in this challenging competition!</p>
                         
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="event-info-card">
-                                    <div class="card-header">
-                                        <i class="fas fa-info-circle"></i> Event Details
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-map-marker-alt"></i> <strong>Venue:</strong><br> Language Lab, Block G</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong><br> March 19, 2025</p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><i class="fas fa-clock"></i> <strong>Time:</strong><br> 2:00 PM - 5:00 PM</p>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>2:00 PM - 4:00 PM</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="mt-4">
-                            <h4><i class="fas fa-clipboard-list"></i> Event Rules</h4>
-                            <ul class="event-rules-list">
-                                <li>Individual participation only</li>
-                                <li>Competition will have 3 rounds: written, oral, and practical</li>
-                                <li>Participants must bring their own writing materials</li>
-                                <li>No electronic devices or reference materials allowed</li>
-                                <li>Judging will be based on accuracy, speed, and technique</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="coordinator-info">
-                            <h4>Event Coordinators</h4>
-                            <div class="coordinator">
-                                <span>Aditya Gupta</span>
-                                <span>+91 9876543224</span>
-                            </div>
-                            <div class="coordinator">
-                                <span>Divya Sharma</span>
-                                <span>+91 9876543225</span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> Event Format
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="event-format-list">
+                                            <li>Team event (2 members per team)</li>
+                                            <li>Three challenging rounds of Kanji mastery</li>
+                                            <li>Round 1: Kanji Recognition & Meaning</li>
+                                            <li>Round 2: Stroke Order & Writing</li>
+                                            <li>Round 3: Compound Words & Usage</li>
+                                            <li>Points awarded for accuracy and neatness</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="event-buttons">
-                        <button class="event-rules-btn">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
                             Download Rules
                             <i class="fas fa-download"></i>
-                        </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event" id="interpret">
+                <div class="event-content event-content-clean">
+                    <div class="event-header">
+                        <h2>Interpret</h2>
+                        <h3>通訳コンテスト</h3>
+                        <p>Showcase your Japanese translation skills!</p>
+                    </div>
+                    <div class="event-description">
+                        <p>Demonstrate your Japanese interpretation skills in this language challenge!</p>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>9:00 AM - 10:30 AM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> Event Format
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="event-format-list">
+                                            <li>Individual event</li>
+                                            <li>Three rounds with increasing difficulty</li>
+                                            <li>Basic to advanced interpretation challenges</li>
+                                            <li>Real-time translation scenarios</li>
+                                            <li>Cultural context understanding</li>
+                                            <li>Pronunciation and fluency assessment</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-buttons">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
+                            Download Rules
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event" id="connections">
+                <div class="event-content event-content-clean">
+                    <div class="event-header">
+                        <h2>Connections</h2>
+                        <h3>つながり</h3>
+                        <p>Connect Japanese words with their meanings!</p>
+                    </div>
+                    <div class="event-description">
+                        <p>Team up and find the connections between Japanese words and meanings!</p>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>11:00 AM - 1:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> Event Format
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="event-format-list">
+                                            <li>Team event (2 members per team)</li>
+                                            <li>Series of images or word-based clues shown on screen</li>
+                                            <li>Quick-fire buzzer rounds for answers</li>
+                                            <li>Progressive difficulty levels</li>
+                                            <li>Bonus points for quick responses</li>
+                                            <li>Team strategy and coordination essential</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-buttons">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
+                            Download Rules
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event" id="drawing-contest">
+                <div class="event-content event-content-clean">
+                    <div class="event-header">
+                        <h2>Drawing Contest</h2>
+                        <h3>日本画コンテスト</h3>
+                        <p>Express your creativity through Japanese art!</p>
+                    </div>
+                    <div class="event-description">
+                        <p>Showcase your artistic talents with Japanese-themed drawings!</p>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>2:00 PM - 4:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> Event Format
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="event-format-list">
+                                            <li>Individual event</li>
+                                            <li>Theme: Japanese Common Themes (provided on spot)</li>
+                                            <li>Traditional and modern art styles welcome</li>
+                                            <li>A3 size paper provided</li>
+                                            <li>All art materials must be brought by participants</li>
+                                            <li>Judging based on creativity and theme relevance</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-buttons">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
+                            Download Rules
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event" id="animethon">
+                <div class="event-content event-content-clean">
+                    <div class="event-header">
+                        <h2>Animethon</h2>
+                        <h3>アニメソン</h3>
+                        <p>Celebrate the world of anime!</p>
+                    </div>
+                    <div class="event-description">
+                        <p>Put your anime knowledge to the test in this exciting competition!</p>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">Event Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <i class="fas fa-map-marker-alt text-danger"></i> <strong>Venue:</strong>
+                                        <p>Main Auditorium, Block A</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong>
+                                        <p>March 15, 2025</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="fas fa-clock text-danger"></i> <strong>Time:</strong>
+                                        <p>10:00 AM - 12:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-info-card">
+                                    <div class="card-header">
+                                        <i class="fas fa-info-circle"></i> Event Format
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="event-format-list">
+                                            <li>Individual event</li>
+                                            <li>Three exciting rounds of anime challenges</li>
+                                            <li>Round 1: Anime Scene & Music Recognition</li>
+                                            <li>Round 2: In-depth Anime Series Trivia</li>
+                                            <li>Round 3: Character Roleplay Performance</li>
+                                            <li>Points based on accuracy and enthusiasm</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-buttons">
+                        <a href="pdfs/rules.pdf" download class="event-rules-btn">
+                            Download Rules
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                 </div>
             </div>
